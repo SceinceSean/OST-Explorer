@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OST Explorer</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body {
+			margin: 0px;
+			font-family: Gill Sans;
+		}
+
+		.track-title {
+			position: absolute;
+			margin-top: 3px;
+			font-size: 40px;
+			font-weight: normal;
+		}
+
+		.filename {
+			position: absolute;
+			margin-top: 3px;
+			font-size: 40px;
+			text-align: right;
+			width: 100%;
+			font-weight: normal;
+		}
+
+		.container {
+			height: 100vh; /* Take up the whole height of the screen*/
+			position: relative;
+			margin-left: 80px;
+			margin-right: 80px;
+		}
+
+		.episode-bar {
+			margin: 0px;
+
+			/* Center Vertically */
+			position: absolute;
+			top: 50%;
+			-ms-transform: translateY(-50%);
+			transform: translateY(-50%);
+
+			width: 100%;
+			height: 24px;
+			background-color: lightgray;
+		}
+
+		.video-container {
+			margin: 0px;
+			position: absolute;
+			width: 100%;
+			height: 340px;
+		}
+
+		.video-inner {
+			position: absolute;
+			width: 480px;
+			height: 100%; /* maybe on bottom use float: bottom;?*/
+			/*background-color: red;*/
+		}
+
+		.next-prev-button-container {
+			/* Center Vertically */
+			position: absolute;
+			top: 50%;
+			-ms-transform: translateY(-50%);
+			transform: translateY(-50%);
+
+			width: 80px;
+			height: 80px;
+		}
+
+		.next-prev-button {
+			border: none;
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+
+			color: transparent;
+			background-color: transparent;
+			animation-name: fadeToTransparent;
+			animation-duration: 1s;
+			font-size: 35px;
+
+			/* Center Horidontally*/
+			position: absolute;
+			left: 50%;
+			-ms-transform: translateX(-50%);
+			transform: translateX(-50%);
+		}
+
+		.next-prev-button:hover {
+			color: gray;
+			background-color: lightgray;
+			animation-name: fadeFromTransparent;
+			animation-duration: 1s;
+		}
+
+		@keyframes fadeFromTransparent {
+			to {
+				color: gray;
+				background-color: lightgray;
+			}
+			from {
+				color: transparent;
+				background-color: transparent;
+			}
+		}
+
+		@keyframes fadeToTransparent {
+			from {
+				color: gray;
+				background-color: lightgray;
+			}
+			to {
+				color: transparent;
+				background-color: transparent;
+			}
+		}
+
+		/* https://www.w3docs.com/snippets/css/how-to-flip-text-with-css.html */
+		.flipH {
+			transform: scale(-1, 1);
+			-moz-transform: scale(-1, 1);
+			-webkit-transform: scale(-1, 1);
+			-o-transform: scale(-1, 1);
+			-ms-transform: scale(-1, 1);
+			transform: scale(-1, 1);
+		}
+
+		.track-name-preview {
+			text-align: center;
+			position: absolute;
+			width: 100%;
+			bottom: 15px;
+		}
+	</style>
+	<script type="text/javascript" src="scripts.js"></script>
+</head>
+<body onload="setup()">
+	<div id="container" class="container">
+		<h2 class="track-title" id="track-title">Track Title</h2>
+		<h2 class="filename" id="filename">filename</h2>
+		<div id="video-container-upper" class="video-container" style="bottom: 50%;">
+			<div id="video-container-upper-inner" class="video-inner">
+				<div id="track-name-preview-container" class="track-name-preview"></div>
+			</div>
+		</div>
+		<div id="video-container-lower" class="video-container" style="top: 50%;">
+			<div id="video-container-lower-inner" class="video-inner"></div>
+		</div>
+		<div id="episode-bar" class="episode-bar"></div>
+
+		<!-- This is kinda hacky. -->
+		<div style="float: right;">
+			<div class="next-prev-button-container">
+				<div class="flipH">
+					<button id="next-button" class="next-prev-button" onclick="nextEp()">⬅︎</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="float: left;">
+		<div class="next-prev-button-container">
+			<button id="prev-button" class="next-prev-button" onclick="prevEp()">⬅︎</button>
+		</div>
+	</div>
+</body>
+</html>
